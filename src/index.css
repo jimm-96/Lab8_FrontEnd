@@ -1,28 +1,35 @@
+/*
+  Paleta: una carta impresa en risógrafo, con dos tintas sobre papel sin brillo.
+  De noche se invierte: papel azul tinta y letras color papel.
+*/
 :root {
-  --text: #4b4453;
-  --text-h: #1c1917;
-  --bg: #fafaf9;
-  --surface: #ffffff;
-  --border: #e7e5e4;
-  --accent: #b45309;
-  --error: #b91c1c;
+  --papel: #e2e5da;
+  --tinta: #22335e;
+  --girasol: #f2b21b;
+  --lapiz: #5d6479;
+  --rojo: #a8323f;
+  --linea: rgba(34, 51, 94, 0.35);
 
-  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --fuente-imprenta: 'IM Fell English', 'Iowan Old Style', Georgia, serif;
+  --fuente-texto: 'Alegreya Sans', 'Segoe UI', system-ui, sans-serif;
+
+  font-family: var(--fuente-texto);
+  font-size: 112.5%; /* 18px */
   line-height: 1.5;
   color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  color: var(--tinta);
+  background: var(--papel);
+  -webkit-font-smoothing: antialiased;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #d6d3d1;
-    --text-h: #fafaf9;
-    --bg: #1c1917;
-    --surface: #292524;
-    --border: #44403c;
-    --accent: #f59e0b;
-    --error: #f87171;
+    --papel: #1b2338;
+    --tinta: #e2e5da;
+    --girasol: #e0a417;
+    --lapiz: #a3aabb;
+    --rojo: #f08a93;
+    --linea: rgba(226, 229, 218, 0.3);
   }
 }
 
@@ -35,4 +42,52 @@
 body {
   margin: 0;
   min-height: 100vh;
+}
+
+/* Grano de papel: ruido muy suave sobre toda la página, sin bloquear clics. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.09;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+  body::before {
+    filter: invert(1);
+    mix-blend-mode: screen;
+    opacity: 0.06;
+  }
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--fuente-imprenta);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px dashed var(--tinta);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--girasol);
+  color: #22335e;
 }

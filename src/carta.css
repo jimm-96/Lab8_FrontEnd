@@ -1,0 +1,93 @@
+/*
+  Estilos de carta para los listados (PlatosList, ChefsList, CategoriasList).
+
+  Ejemplo de uso:
+
+    <ul className="carta">
+      <li className="carta-item">
+        <div className="carta-linea">
+          <span className="carta-nombre">Lomo saltado</span>
+          <span className="carta-precio">$8.990</span>
+        </div>
+        <p className="carta-detalle">Fondos</p>
+      </li>
+
+      <li className="carta-item agotado">   ← plato no disponible
+        ...
+      </li>
+    </ul>
+
+    <p className="estado">Cargando la carta…</p>
+    <p className="estado estado-error">No se pudo cargar la carta. Revisa que el backend esté corriendo.</p>
+
+  - Si la línea tiene .carta-precio, aparecen los puntos guía entre el nombre y el precio.
+  - El precio se formatea con: plato.precio.toLocaleString('es-CL')
+*/
+
+.carta {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carta-item {
+  padding: 0.7rem 0;
+}
+
+.carta-linea {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.carta-nombre {
+  font-family: var(--fuente-imprenta);
+  font-size: 1.3rem;
+  line-height: 1.25;
+  color: var(--tinta);
+}
+
+/* Puntos guía entre el nombre y el precio, como en una carta impresa. */
+.carta-linea:has(.carta-precio)::after {
+  content: '';
+  order: 1;
+  flex: 1;
+  min-width: 1.5rem;
+  border-bottom: 2px dotted var(--linea);
+  transform: translateY(-0.3em);
+}
+
+.carta-precio {
+  order: 2;
+  font-weight: 500;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+}
+
+.carta-detalle {
+  margin-top: 0.15rem;
+  color: var(--lapiz);
+}
+
+/* Plato no disponible: el nombre tachado y el detalle en rojo comanda. */
+.agotado .carta-nombre {
+  text-decoration: line-through;
+  text-decoration-color: var(--rojo);
+  text-decoration-thickness: 2px;
+  color: var(--lapiz);
+}
+
+.agotado .carta-detalle {
+  color: var(--rojo);
+}
+
+.estado {
+  font-family: var(--fuente-imprenta);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--lapiz);
+}
+
+.estado-error {
+  color: var(--rojo);
+}

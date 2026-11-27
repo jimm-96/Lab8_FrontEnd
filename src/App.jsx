@@ -17,12 +17,12 @@ function App() {
 
   return (
     <div className="app">
-      <header className="app-header">
-        <h1>Restaurante</h1>
-        <p>Catálogo de platos, chefs y categorías</p>
+      <header className="portada">
+        <h1 className="marca">Cooking with Claude</h1>
+        <p className="lema">Cocina de barrio, sin apuro.</p>
       </header>
 
-      <nav className="tabs">
+      <nav className="tabs" aria-label="Secciones de la carta">
         {PESTANAS.map((p) => (
           <button
             key={p.id}
