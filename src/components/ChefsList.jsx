@@ -1,11 +1,23 @@
-// Listado de chefs — a cargo de Christian (rama feature/listado-chefs).
-// Pendiente: usar getChefs() de ../api con useState + useEffect y mostrar
-// los estados de carga, error y la lista.
+import { useEffect, useState } from 'react'
+import { getChefs } from '../api'
+
 function ChefsList() {
+  const [chefs, setChefs] = useState([])
+
+  useEffect(() => {
+    getChefs().then(setChefs)
+  }, [])
+
   return (
     <section>
       <h2>Chefs</h2>
-      <p>Listado en construcción.</p>
+      <ul>
+        {chefs.map((chef) => (
+          <li key={chef.id}>
+            <strong>{chef.nombre}</strong>: {chef.especialidad} ({chef.anios_experiencia} años de experiencia)
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }
