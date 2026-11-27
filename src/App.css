@@ -1,46 +1,61 @@
+/* La página es una hoja de carta: una columna angosta con margen generoso. */
 .app {
-  max-width: 960px;
+  max-width: 40rem;
   margin: 0 auto;
-  padding: 2rem 1.25rem;
+  padding: clamp(2.5rem, 8vh, 5rem) 1.5rem 4rem;
 }
 
-.app-header {
-  margin-bottom: 2rem;
+.portada {
+  margin-bottom: 2.75rem;
 }
 
-.app-header h1 {
-  margin: 0;
-  font-size: 2rem;
-  color: var(--text-h);
+/*
+  El nombre se imprime en dos tintas que no calzan del todo, como en un risógrafo:
+  la tinta azul encima y la girasol corrida hacia abajo a la derecha.
+*/
+.marca {
+  font-size: clamp(2.6rem, 9vw, 4.25rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--tinta);
+  text-shadow: 0.045em 0.04em 0 var(--girasol);
 }
 
-.app-header p {
-  margin: 0.25rem 0 0;
+.lema {
+  margin-top: 0.75rem;
+  font-family: var(--fuente-imprenta);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--lapiz);
 }
 
 .tabs {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 0.25rem 1.75rem;
+  margin-bottom: 2.5rem;
 }
 
 .tab {
-  padding: 0.6rem 1rem;
+  padding: 0.15rem 0;
   border: none;
-  border-bottom: 2px solid transparent;
   background: none;
-  color: var(--text);
-  font: inherit;
+  color: var(--lapiz);
+  font-family: var(--fuente-imprenta);
+  font-size: 1.35rem;
   cursor: pointer;
 }
 
 .tab:hover {
-  color: var(--text-h);
+  color: var(--tinta);
 }
 
+/* La pestaña activa queda subrayada con un trazo de tinta girasol, separado de la letra. */
 .tab-activa {
-  border-bottom-color: var(--accent);
-  color: var(--text-h);
-  font-weight: 600;
+  color: var(--tinta);
+  text-decoration: underline;
+  text-decoration-color: var(--girasol);
+  text-decoration-thickness: 0.14em;
+  text-underline-offset: 0.3em;
+  text-decoration-skip-ink: none;
 }
